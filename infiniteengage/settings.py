@@ -6,7 +6,7 @@ import dj_database_url  # For database configuration in production
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-secret-key')  # Use environment variable for secret key
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')  # Use environment variable for secret key
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'  # Ensures DEBUG is True by default in development, False in production
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1 your-app-name.azurewebsites.net').split()
