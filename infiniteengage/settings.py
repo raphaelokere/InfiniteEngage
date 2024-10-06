@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'infiniteengage.wsgi.application'
 if os.environ.get('DJANGO_ENV') == 'production':
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL')
+            default=os.getenv('DATABASE_URL')
         )
     }
 else:
@@ -100,3 +100,5 @@ if os.environ.get('USE_AZURE_STORAGE') == 'True':
     AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
     AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
     AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')
+    
+    STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Optional if you want static files in Azure
