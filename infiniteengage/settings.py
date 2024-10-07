@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'app',  # Your main app
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net']
+
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
