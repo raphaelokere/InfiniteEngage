@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')  # Use environment variable for secret key
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'  # Ensures DEBUG is True by default in development, False in production
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1 your-app-name.azurewebsites.net').split()
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1 infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net').split()
 
 # Installed apps
 INSTALLED_APPS = [
