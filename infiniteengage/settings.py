@@ -11,6 +11,8 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'  # Ensures DEBUG is Tru
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1 infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net').split()
 
+CSRF_TRUSTED_ORIGINS = ['https://infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net']
+
 # Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,10 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',  # Your main app
+    'social_django',  # For social authentication
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net']
-
+# Authentication backends for social login
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.azuread.AzureADOAuth2',
     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend for admin login
@@ -40,13 +42,13 @@ LOGOUT_REDIRECT_URL = '/'
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For serving static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 # URL Configuration
@@ -64,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # Social Auth
+                'social_django.context_processors.login_redirect',  # Social Auth
             ],
         },
     },
@@ -88,7 +92,7 @@ else:
         }
     }
 
-# Static files (CSS, JavaScript, Images)
+# Static and Media Files
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -97,6 +101,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Where static files will be collected in production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# WhiteNoise Configuration for static file handling
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -116,5 +123,4 @@ if os.environ.get('USE_AZURE_STORAGE') == 'True':
     AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
     AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
     AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')
-    
     STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Optional if you want static files in Azure
