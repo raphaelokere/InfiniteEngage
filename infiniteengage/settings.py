@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')  # Use environment variable for secret key
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'  # Ensures DEBUG is True by default in development, False in production
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'  # Set to True for debugging, remember to set back to False in production
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1 infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net').split()
 
@@ -31,6 +31,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend for admin login
 )
 
+# Azure AD OAuth2 credentials
 SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = os.getenv('AZURE_CLIENT_ID')
 SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = os.getenv('AZURE_CLIENT_SECRET')
 SOCIAL_AUTH_AZUREAD_OAUTH2_TENANT_ID = os.getenv('AZURE_TENANT_ID')
@@ -110,7 +111,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security settings for production
 if os.environ.get('DJANGO_ENV') == 'production':
-    SECURE_SSL_REDIRECT = False
+    SECURE_SSL_REDIRECT = False  # Change this to True once HTTPS is configured
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -124,3 +125,18 @@ if os.environ.get('USE_AZURE_STORAGE') == 'True':
     AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')
     AZURE_CONTAINER = os.environ.get('AZURE_CONTAINER')
     STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'  # Optional if you want static files in Azure
+
+# Logging for debugging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
