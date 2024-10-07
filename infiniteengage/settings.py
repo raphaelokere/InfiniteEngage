@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')  # Use environment variable for secret key
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'  # Set to True for debugging, remember to set back to False in production
+DEBUG = True  # Set to True for debugging, remember to set back to False in production
 
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost 127.0.0.1 infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net').split()
 
