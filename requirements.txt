@@ -1,5 +1,6 @@
 Django>=4.0,<5.0
 gunicorn
 dj-database-url
+social-auth-app-django
 psycopg2  # For PostgreSQL, or use dj-database-url for Heroku-like DB config
 django-storages  # If you're using Azure Blob Storage

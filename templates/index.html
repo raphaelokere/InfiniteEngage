@@ -4,21 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to InfiniteEngage</title>
-    <!-- Add Bootstrap CSS -->
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS for more style -->
+    <style>
+      .hero-section {
+        background: url('https://example.com/your-background-image.jpg') no-repeat center center/cover;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+      }
+      .feature-section {
+        padding: 50px 0;
+        background-color: #f8f9fa;
+      }
+      .feature-card {
+        padding: 20px;
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
   </head>
   <body>
-    <!-- Bootstrap Container for responsiveness -->
-    <div class="container text-center mt-5">
-      <h1 class="display-4">Welcome to InfiniteEngage!</h1>
-      <p class="lead">Your one-stop platform for student engagement.</p>
-      <a href="/login/" class="btn btn-primary mt-3">Login</a>
-    </div>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <h1 class="display-4">Welcome to InfiniteEngage!</h1>
+    <p class="lead">A seamless platform for student engagement and collaboration.</p>
+    
+    <!-- Updated Login Button for Azure AD -->
+    <a href="{% url 'social:begin' 'azuread-oauth2' %}" class="btn btn-primary btn-lg">Login with School Email</a>
 
-    <!-- Add Bootstrap JS (Optional if you need interactivity) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+    <a href="#" class="btn btn-light btn-lg">Learn More</a>
+  </div>
+</section>
+
+    <!-- Features Section -->
+    <section class="feature-section">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div class="feature-card">
+              <h3>Manage Organizations</h3>
+              <p>Track, manage, and engage with student organizations.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <h3>Event Calendars</h3>
+              <p>Stay updated with upcoming events and activities.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <h3>Co-Curricular Records</h3>
+              <p>Maintain a record of all your student activities and accomplishments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-4">
+      <p

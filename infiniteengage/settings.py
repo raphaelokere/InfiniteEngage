@@ -24,6 +24,19 @@ INSTALLED_APPS = [
 
 CSRF_TRUSTED_ORIGINS = ['https://infiniteengage-ccegc6dnhzahc2fb.eastus2-01.azurewebsites.net']
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.azuread.AzureADOAuth2',
+    'django.contrib.auth.backends.ModelBackend',  # Keep the default backend for admin login
+)
+
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = os.getenv('AZURE_CLIENT_ID')  # Client ID from Azure AD
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = os.getenv('AZURE_CLIENT_SECRET')  # Client Secret from Azure AD
+SOCIAL_AUTH_AZUREAD_OAUTH2_TENANT_ID = os.getenv('AZURE_TENANT_ID')  # Tenant ID from Azure AD
+
+# Redirect after login
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

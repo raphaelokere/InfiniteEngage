@@ -6,6 +6,14 @@ InfiniteEngage is a SaaS Student Engagement Platform built with Django and deplo
 
 1. Clone the repository.
 2. Install dependencies using:
-   ```bash
+   ```
    pip install -r requirements.txt
+   ```
+3. Run migrations:
+   ```python manage.py migrate
+
+   ```
+4. Start the development server:
+   ```python manage.py runserver
+
    ```
